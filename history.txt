@@ -1,0 +1,15 @@
+    1  sudo apt-get update
+    2  sudo apt-get install synaptic
+    3  sudo apt-get install mysql-server
+    4  mysql -u root -p
+    5  sudo apt-get install php
+    6  sudo apt-get install git
+    7  mkdir IT635
+    8  cd IT635
+    9  git init
+   10  git status 
+   11  mysqldump -u root -p Classes > backup.sql
+   12  cat backup.sql
+   13  git add backup.sql
+   14  git status 
+   15  history > history.txt

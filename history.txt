@@ -13,3 +13,26 @@
    13  git add backup.sql
    14  git status 
    15  history > history.txt
+   16  git add history.txt
+   17  git status 
+   18  git commit -m "first commit"
+   19  git config --global user.email "djzreik@haz3@njit.edu"
+   20  git config --global user.name "Your Name"
+   21  git config --global user.name "Hussein Zreik"
+   22  git commit -m "first commit"
+   23  sudo apt-get install gitk
+   24  gitk
+   25  git log
+   26  git remote add origin git@github.com:djzreik/IT635Spring17.git
+   27  git push -u origin master 
+   28  git remote add origin git@github.com:djzreik/IT635Spring17.git
+   29  git remote add origin https://github.com/djzreik/IT635Spring17.git
+   30  git push -u origin master 
+   31  git remote remove origin
+   32  git remote add origin https://github.com/djzreik/IT635Spring17.git
+   33  git push -u origin master 
+   34  git commit -m "update history"
+   35  git commit -am "update history"
+   36  run gitk
+   37  gitk
+   38  history > history.txt

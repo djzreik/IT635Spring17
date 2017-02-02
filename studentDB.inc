@@ -29,9 +29,15 @@ public function getStudentRecords()
 	}
 	return $response;
 }
-public function addStudentRecord($studentName,$id,$address,$year)
+public function addStudentRecord($studentName,$studentid,$studentaddress,$studentyear)
 {
-	$query = "insert into class(student,ID,address,year) VALUES ('$studentName','$id','$address',$year);";
+	$sn = $this->db->real_escape_string($studentName);
+	$id = $this->db->real_escape_string($studentid);
+	$address = $this->db->real_escape_string($studentaddress);
+	$year = $this->db->real_escape_string($studentyear);
+	echo "before escape:\n$studentyear\n";
+	echo "after escape:\n$year\n";
+	$query = "insert into class(student,ID,address,year) VALUES ('$sn','$id','$address',$year);";
 	echo "executing SQL statement:\n".$query."\n";
 	if (!$this->db->query($query))
 	{

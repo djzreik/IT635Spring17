@@ -13,8 +13,14 @@ echo "successfully connected!".PHP_EOL;
 
 $query = "select * from class;";
 
-$db->query ($query);
+$queryResponse = $db->query ($query);
 
+print_r($queryResponse);
+
+while($row = $queryResponse->fetch_assoc())
+{
+	print_r($row);
+}
 $db->close();
 
 echo "program complete".PHP_EOL;

@@ -1,28 +1,18 @@
 #!/usr/bin/php
 <?php
-$db = new mysqli("localhost","root","2011maxima","Classes");
 
+require_once("studentDB.inc");
 
-if ($db->connect_errno != 0)
-{
-	echo "error connecting to database: ".$db->connect_error.PHP_EOL;
-	exit();
-}
+echo "executing script: ".$argv[0].PHP_EOL;
 
-echo "successfully connected!".PHP_EOL;
+$studentDB = new StudentAccess("Classes");
 
-$query = "select * from class;";
+$students = $studentDB->getStudentRecords();
 
-$queryResponse = $db->query ($query);
+echo "student records in db are:".PHP_EOL;
 
-print_r($queryResponse);
+print_r($students);
 
-while($row = $queryResponse->fetch_assoc())
-{
-	print_r($row);
-}
-$db->close();
-
-echo "program complete".PHP_EOL;
+echo $argv[0]." complete".PHP_EOL;
 
 ?>

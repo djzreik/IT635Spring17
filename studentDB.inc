@@ -35,7 +35,7 @@ public function addStudentRecord($studentName,$studentid,$studentaddress,$studen
 	$id = $this->db->real_escape_string($studentid);
 	$address = $this->db->real_escape_string($studentaddress);
 	$year = $this->db->real_escape_string($studentyear);
-	echo "before escape:\n$studentyear\n";
+	echo "before escape:\n\"$studentyear\"\n";
 	echo "after escape:\n$year\n";
 	$query = "insert into class(student,ID,address,year) VALUES ('$sn','$id','$address',$year);";
 	echo "executing SQL statement:\n".$query."\n";
@@ -43,6 +43,22 @@ public function addStudentRecord($studentName,$studentid,$studentaddress,$studen
 	{
 		echo "failed to insert record for $studentName".PHP_EOL;
 	}
+}
+public function validateUser($username,$password)
+{
+	$un = $this->db->real_escape_string($username);
+	$pw = $this->db->real_escape_string($password);
+	$query = "select * from users where username = '$un';";
+	$result = $this->db->query($query);
+	while ($row = $result->fetch_assoc())
+	{
+		if ($row["password"] == $pw)
+		{
+			// I have a match
+			return true;
+		}
+	}
+	return false;
 }
 }
 ?>

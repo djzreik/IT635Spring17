@@ -17,15 +17,15 @@ $fp = fopen('php://stdin', 'r');
 $last_line = false;
 $message = '';
 
-$exit = 
+$option = '';
 
-while($option !== 3) {
+while($option !== "3\n") {
 print "Welcome to the WoW Armory! Please type in your password to log in as Admin, otherwise hit enter to continue.\n";
 
 
 $pw = fgets($fp, 1024); // read the special file to get the user input from keyboard
 
-if ($pw == "wowadmin"){
+if ($pw == "wowadmin\n"){
 	
 	print "Welcome to the Admin Menu! You must be here because the new tier is out! Select 1 to Add Armor to the Database or Select 2 to Remove Armor from the Database, 3 to exit:  \r\n";
 	
@@ -33,7 +33,7 @@ $option = fgets($fp, 1024); // read the special file to get the user input from 
 
 	
 	 switch ($option) {
-		case "1":
+		case "1\n":
 
 		print "Enter equipment to add: ";
 		print "Enter Name: \r\n";
@@ -56,16 +56,23 @@ $option = fgets($fp, 1024); // read the special file to get the user input from 
 		$sendadd = $db->query($addquery);
 		break;
 
+		case "2\n":
+
+		print "Enter equipment to delete: ";
+		print "Enter Name: \r\n";
+		$Name =trim(fgets(STDIN));
+		print "Enter Equipment ID: \r\n";
+		$EquipmentID =trim(fgets(STDIN));
 		
+
+		$delquery = "DELETE FROM Equipment WHERE Name = '$Name' AND EquipmentID = '$EquipmentID'";
+
+		$senddel = $db->query($delquery);
+		break;
 		
 }
 	
 }
-
-}
-
-
-
 
 print "To Begin: Please select by typing the Class you would like to outfit: Death Knight, Druid, Hunter, Mage, Monk, Paladin, Priest, Rogue, Shaman, Warlock, Warrior, or Demon Hunter.\n";
 
@@ -164,6 +171,12 @@ while ($row = mysqli_fetch_array($armor2)) {
 
 $db->close();
 print "\nThanks for using WoW Armory, run the app again to build another class! Now go get a life, Goodbye. :)";
+break;
+
+}
+
+
+
 
 
 ?>

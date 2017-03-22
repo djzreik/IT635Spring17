@@ -36,25 +36,40 @@ $option = fgets($fp, 1024); // read the special file to get the user input from 
 		case "1\n":
 
 		print "Enter equipment to add: ";
+
 		print "Enter Name: \r\n";
+
 		$Name =trim(fgets(STDIN));
+
 		print "Enter Equipment ID: \r\n";
+
 		$EquipmentID =trim(fgets(STDIN));
+
 		print "Enter Type: \r\n";
+
 		$Type =trim(fgets(STDIN));
+
 		print "Enter PrimaryStat: \r\n";
+
 		$PrimaryStat =trim(fgets(STDIN));
+
 		print "Enter Slot: \r\n";
+
 		$Slot =trim(fgets(STDIN));
+
 		print "Enter Class ID: \r\n";
+
 		$ClassID =trim(fgets(STDIN));
+
 		print "Enter Spec ID: \r\n";
+
 		$SpecID =trim(fgets(STDIN));
 
 		$addquery = "INSERT INTO Equipment(Name, EquipmentID, Type, PrimaryStat, Slot, ClassID, SpecID) VALUES ('$Name', '$EquipmentID', '$Type', '$PrimaryStat', '$Slot', '$ClassID', '$SpecID')";
 
 		$sendadd = $db->query($addquery);
-		break;
+		
+		break; 
 
 		case "2\n":
 

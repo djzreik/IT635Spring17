@@ -28,56 +28,55 @@ $class = fgets($fp, 1024); // stores the class user inputs
 
 $class = trim($class); //removes /n
 
- 
-	$classID = $db->query("SELECT classID FROM Classes WHERE Name = '$class'");
-	$result = mysqli_fetch_array($classID);
-	print $result['classID'];
 	
-$armor = $db->query("SELECT * FROM Equipment WHERE ClassID = '$result['classID']'");
-$result2 = mysqli_fetch_array($armor);
-	$headslot = "";
-	$chestslot = "";
-	$shoulderslot = "";
-	$legslot = "";
-	foreach ($result2 as 
-
-	
-
-
-
 print "Now please select your Spec. If you would like us to recommend all the armor availble for all the Specs of the class chosen, please press enter!\n";
 
 $spec = fgets($fp, 1024); // stores the spec user inputs
 
 $spec = trim($spec); //removes /n
 
-if ($spec == "") {
+if ($spec == "") 
+{
 	$classID = $db->query("SELECT classID FROM Classes WHERE Name = '$class'");
 	$result = mysqli_fetch_array($classID);
-	print $result['classID'];
 	
-$armor = $db->query("SELECT * FROM Equipment WHERE ClassID = '$result['classID']'");
-$result2 = mysqli_fetch_array($armor);
-	$headslot = "";
-	$chestslot = "";
-	$shoulderslot = "";
-	$legslot = "";
-	foreach ($result2 as 
+	
+	$class2 = $result['classID'];
+	
+$armor = $db->query("SELECT * FROM Equipment WHERE ClassID = '$class2'");
+
+print "Here is the buildout that we recommend for the chosen Class\Spec: Slot=\r\n";
+
+while ($row = mysqli_fetch_array($armor)) {
+	if ($row ['Slot'] == 'Head'){
+	
+	echo "Head: ".$row['Name']."\r\n";
+	
+}
+	if ($row ['Slot'] == 'Chest'){
+	
+	echo "Chest: ".$row['Name']."\r\n";
+	
+}
+	if ($row ['Slot'] == 'Legs'){
+	
+	echo "Legs: ".$row['Name']."\r\n";
+	
+}
+	if ($row ['Slot'] == 'Shoulders'){
+	
+	echo "Shoulders: ".$row['Name']."\r\n";
+	
+}
+}
+
 
 	
 
 }
 
-print "Here is the buildout that we recommend for the chosen Class\Spec: Slot= ";
 
-print "\nHead: ";
-//print HeadVariable
-print "\nShoulder: ";
-//print ShoulderVariable
-print "\nChest: ";
-//print ChestVariable
-print "\nLegs: ";
-//print LegVariable
+
 
 $db->close();
 print "\nThanks for using WoW Armory, run the app again to build another class! Now go get a life, Goodbye. :)";

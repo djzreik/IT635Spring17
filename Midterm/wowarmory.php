@@ -19,7 +19,7 @@ $message = '';
 
 $exit = 
 
-while ($option != 3) {
+while($option !== 3) {
 print "Welcome to the WoW Armory! Please type in your password to log in as Admin, otherwise hit enter to continue.\n";
 
 
@@ -33,7 +33,7 @@ $option = fgets($fp, 1024); // read the special file to get the user input from 
 
 	
 	 switch ($option) {
-		case '1':
+		case "1":
 
 		print "Enter equipment to add: ";
 		print "Enter Name: \r\n";
@@ -51,24 +51,12 @@ $option = fgets($fp, 1024); // read the special file to get the user input from 
 		print "Enter Spec ID: \r\n";
 		$SpecID =trim(fgets(STDIN));
 
-		$addquery = "INSERT INTO Equipment(Name, EquipmentID, Type, PrimaryStat, Slot, ClassID, SpecID) VALUES ('$Name', '$EquipmentID', '$Type', '$PrimaryStat', '$Slot', '$ClassID', '$SpecID'";
+		$addquery = "INSERT INTO Equipment(Name, EquipmentID, Type, PrimaryStat, Slot, ClassID, SpecID) VALUES ('$Name', '$EquipmentID', '$Type', '$PrimaryStat', '$Slot', '$ClassID', '$SpecID')";
 
 		$sendadd = $db->query($addquery);
 		break;
 
-		case '2':
-
-		print "Enter equipment to Delete: ";
-		print "Enter Name: \r\n";
-		$Name =trim(fgets(STDIN));
-		print "Enter Equipment ID: \r\n";
-		$EquipmentID =trim(fgets(STDIN));
-
-		$delquery = "INSERT INTO Equipment(Name, EquipmentID, Type, PrimaryStat, Slot, ClassID, SpecID) VALUES ('$Name', '$EquipmentID', '$Type', '$PrimaryStat', '$Slot', '$ClassID', '$SpecID'";
-
-		$sendadd = $db->query($addquery);
-		break;
-
+		
 		
 }
 	

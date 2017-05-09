@@ -3,6 +3,15 @@
 
 <?php
 
+$mdb = new MongoDB\Driver\Manager("mongodb://djzreik:2011maxima@ds133241.mlab.com:33241/wowhz");
+	$command = new MongoDB\Driver\Command(['ping' => 1]);
+	$mdb->executeCommand ('db', $command);
+	$servers = $mdb->getServers();  
+	$filter = array();
+	$query = new MongoDB\Driver\Query($filter);
+	$races = $mdb->executeQuery("wowhz.Race", $query);
+
+
 $db = new mysqli('localhost', 'root', '2011maxima', 'WoW');
 
 if ($db->connect_errno > 0)
@@ -19,13 +28,25 @@ $message = '';
 
 $option = '';
 
+
 while($option !== "3\n") {
 print "Welcome to the WoW Armory! Please type in your password to log in as Admin, otherwise hit enter to continue.\n";
 
+echo "Enter Password: \r\n";
 
-$pw = fgets($fp, 1024); // read the special file to get the user input from keyboard
+$passwd =trim(fgets(STDIN));
 
-if ($pw == "wowadmin\n"){
+$hashpasswd= hash('sha256', $passwd);
+
+$insertString = "SELECT * FROM User WHERE password='$hashpasswd';";
+
+$results = $db->query($insertString);
+$column = mysqli_fetch_array($results);
+
+
+#$pw = fgets($fp, 1024); // read the special file to get the user input from keyboard
+
+if ($column['password'] == $hashpasswd){
 	
 	print "Welcome to the Admin Menu! You must be here because the new tier is out! Select 1 to Add Armor to the Database or Select 2 to Remove Armor from the Database, 3 to exit:  \r\n";
 	
@@ -89,8 +110,16 @@ $option = fgets($fp, 1024); // read the special file to get the user input from 
 	
 }
 
-print "To Begin: Please select by typing the Class you would like to outfit: Death Knight, Druid, Hunter, Mage, Monk, Paladin, Priest, Rogue, Shaman, Warlock, Warrior, or Demon Hunter.\n";
+print "To Begin: Please select by typing the Class you would like to outfit: Death Knight, Druid, Hunter, Mage, Monk, Paladin, Priest, Rogue, Shaman, Warlock, Warrior, or Demon Hunter. Also, Some available races are: ";
 
+foreach ($races as $wow) {
+
+		
+		$race = $wow->race;
+		echo $race." ";
+	}
+
+		echo "\r\n";
 $class = fgets($fp, 1024); // stores the class user inputs
 
 $class = trim($class); //removes /n
@@ -111,28 +140,28 @@ $spec2 = $specresult['specID'];
 
 $armor1 = $db->query("SELECT * FROM Equipment WHERE SpecID = '$spec2'");
 
-print "Here is the buildout that we recommend for the chosen Class\Spec: Slot=\r\n";
+print "Here is the buildout that we recommend for the chosen Class\Spec. This Equipment can be obtained from the Zone listed below. They are scattered among the many Bosses in this raid. To Obtain them, we recommend a 10-Man Raid Team for the Lower Powered gear, and a 25-Man Raid team for the Higher Powered Gear. (We HIGHLY recommend joining a guild!) : Slot=\r\n";
 
 while ($row = mysqli_fetch_array($armor1)) {
 	if ($row ['Slot'] == 'Head'){
 	
 	echo "Head: ".$row['Name']."\r\n";
-	
+	echo "Zone: ".$row['Zone']."\r\n";
 }
 	if ($row ['Slot'] == 'Chest'){
 	
 	echo "Chest: ".$row['Name']."\r\n";
-	
+	echo "Zone: ".$row['Zone']."\r\n";
 }
 	if ($row ['Slot'] == 'Legs'){
 	
 	echo "Legs: ".$row['Name']."\r\n";
-	
+	echo "Zone: ".$row['Zone']."\r\n";
 }
 	if ($row ['Slot'] == 'Shoulders'){
 	
 	echo "Shoulders: ".$row['Name']."\r\n";
-	
+	echo "Zone: ".$row['Zone']."\r\n";
 }
 }
 
@@ -149,6 +178,7 @@ if ($spec == "")
 	
 	$class2 = $result['classID'];
 	
+	
 $armor2 = $db->query("SELECT * FROM Equipment WHERE ClassID = '$class2'");
 
 print "Here is the buildout that we recommend for the chosen Class\Spec: Slot=\r\n";
@@ -162,12 +192,11 @@ while ($row = mysqli_fetch_array($armor2)) {
 	if ($row ['Slot'] == 'Chest'){
 	
 	echo "Chest: ".$row['Name']."\r\n";
-	
+
 }
 	if ($row ['Slot'] == 'Legs'){
 	
 	echo "Legs: ".$row['Name']."\r\n";
-	
 }
 	if ($row ['Slot'] == 'Shoulders'){
 	

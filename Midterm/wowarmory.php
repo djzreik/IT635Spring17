@@ -43,9 +43,6 @@ $insertString = "SELECT * FROM User WHERE password='$hashpasswd';";
 $results = $db->query($insertString);
 $column = mysqli_fetch_array($results);
 
-
-#$pw = fgets($fp, 1024); // read the special file to get the user input from keyboard
-
 if ($column['password'] == $hashpasswd){
 	
 	print "Welcome to the Admin Menu! You must be here because the new tier is out! Select 1 to Add Armor to the Database or Select 2 to Remove Armor from the Database, 3 to exit:  \r\n";
@@ -166,10 +163,6 @@ while ($row = mysqli_fetch_array($armor1)) {
 }
 
 
-
-
-
-
 if ($spec == "") 
 {
 	$classID = $db->query("SELECT classID FROM Classes WHERE Name = '$class'");
@@ -187,20 +180,22 @@ while ($row = mysqli_fetch_array($armor2)) {
 	if ($row ['Slot'] == 'Head'){
 	
 	echo "Head: ".$row['Name']."\r\n";
-	
+	echo "Zone: ".$row['Zone']."\r\n";
 }
 	if ($row ['Slot'] == 'Chest'){
 	
 	echo "Chest: ".$row['Name']."\r\n";
-
+	echo "Zone: ".$row['Zone']."\r\n";
 }
 	if ($row ['Slot'] == 'Legs'){
 	
 	echo "Legs: ".$row['Name']."\r\n";
+	echo "Zone: ".$row['Zone']."\r\n";
 }
 	if ($row ['Slot'] == 'Shoulders'){
 	
 	echo "Shoulders: ".$row['Name']."\r\n";
+	echo "Zone: ".$row['Zone']."\r\n";
 	
 }
 }

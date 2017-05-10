@@ -36,16 +36,16 @@ echo "Enter Password: \r\n";
 
 $passwd =trim(fgets(STDIN));
 
-$hashpasswd= hash('sha256', $passwd);
+$hashing= hash('sha256', $passwd);
 
-$insertString = "SELECT * FROM User WHERE password='$hashpasswd';";
+$insertString = "SELECT * FROM User WHERE password='$hashing';";
 
 $results = $db->query($insertString);
 $column = mysqli_fetch_array($results);
 
-if ($column['password'] == $hashpasswd){
+if ($column['password'] == $hashing){
 	
-	print "Welcome to the Admin Menu! You must be here because the new tier is out! Select 1 to Add Armor to the Database or Select 2 to Remove Armor from the Database, 3 to exit:  \r\n";
+print "Welcome to the Admin Menu! You must be here because the new tier is out! Select 1 to Add Armor to the Database or Select 2 to Remove Armor from the Database, 3 to exit:  \r\n";
 	
 $option = fgets($fp, 1024); // read the special file to get the user input from keyboard
 
